@@ -19,7 +19,7 @@ public class ProductIntegration {
         try {
             String csv = HttpClient.newHttpClient()
                     .send(HttpRequest.newBuilder()
-                                    .uri(new URI("https://turini.github.io/livro-java-9/books.csv"))
+                                    .uri(new URI("https://raw.githubusercontent.com/vtferrari/primeiras-impressoes-java-9/master/products.csv"))
                                     .GET().build(),
                             HttpResponse.BodyHandler.asString()).body();
 
@@ -35,7 +35,9 @@ public class ProductIntegration {
     public static Product create(String line) {
         String[] split = line.split(",");
         String name = split[0];
-        LocalDateTime dateTime = LocalDateTime.parse( split[1], DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        System.out.println( split[1]);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime dateTime = LocalDateTime.parse( split[1], formatter);
         BigDecimal price = new BigDecimal(split[2]);
         return new Product(name, dateTime, price);
     }

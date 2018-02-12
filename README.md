@@ -98,7 +98,7 @@ HttpClient.newBuilder()
 import jdk.incubator.http.*
 CompletableFuture<HttpResponse<String>> response = HttpClient.newHttpClient()
     .sendAsync(HttpRequest.newBuilder()
-    .uri( new URI( "https://turini.github.io/livro-java-9/books.csv" ))
+    .uri( new URI( "https://raw.githubusercontent.com/vtferrari/primeiras-impressoes-java-9/master/products.csv" ))
     .GET().build(), HttpResponse.BodyHandler.asString());
 
 ```
