@@ -1,8 +1,8 @@
-#Java 9
+# Java 9
 
 Breve apresentação sobre Java9
 
-##JShell
+## JShell
 ```sh
 jshell
 ```
@@ -68,7 +68,7 @@ Optional.stream
 ### Encadeando optionals
 Optional.empty().or(() -> Optional.empty()) .or(() -> Optional.empty()) .or(() -> Optional.of(10L));
 
-##HTTP/2 Client API e modulos de imcubação
+## HTTP/2 Client API e modulos de imcubação
 ```java
 URL url = new URL( "https://www.google.com.br/" ); 
 URLConnection urlConnection = url.openConnection(); 
@@ -93,7 +93,7 @@ HttpClient.newBuilder()
             HttpResponse.BodyHandler.asString())
             .body();
 ```
-####Requisições assíncronas
+#### Requisições assíncronas
 ```java
 import jdk.incubator.http.*
 CompletableFuture<HttpResponse<String>> response = HttpClient.newHttpClient()
@@ -114,4 +114,12 @@ response.whenComplete((r,t) -> System.out.println(r.body()));
 
 tbm trabalha facilmente com websocket
 
-###Reactive Streams
+### Reactive Streams
+
+Algumas implementações de Streams reativos para java: 
+
+- RXJava: https://github.com/ReactiveX/RxJava  
+- Akka Streams: http://doc.akka.io/docs/akka/current/java/stream/index.html  
+- Project Reactor: https://projectreactor.io  
+- Reactive Streams: http://www.reactive-streams.org 
+ 
