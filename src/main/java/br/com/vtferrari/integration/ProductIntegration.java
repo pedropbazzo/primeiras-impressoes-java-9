@@ -17,7 +17,7 @@ import java.util.stream.Stream;
 public class ProductIntegration {
     public static List<Product> all() {
         try {
-            String csv = HttpClient.newHttpClient()
+            final String csv = HttpClient.newHttpClient()
                     .send(HttpRequest.newBuilder()
                                     .uri(new URI("https://raw.githubusercontent.com/vtferrari/primeiras-impressoes-java-9/master/products.csv"))
                                     .GET().build(),
@@ -26,20 +26,25 @@ public class ProductIntegration {
             return Stream.of(csv.split("\n"))
                     .map(ProductIntegration::create)
                     .collect(Collectors.toList());
-
         } catch (Exception e) {
             throw new RuntimeException("Não foi possível conectar ", e);
         }
     }
 
-    public static Product create(String line) {
-        String[] split = line.split(",");
-        String name = split[0];
-        System.out.println( split[1]);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        LocalDateTime dateTime = LocalDateTime.parse( split[1], formatter);
-        BigDecimal price = new BigDecimal(split[2]);
+    private static Product create(String line) {
+        final String[] split = line.split(",");
+        final String name = split[0];
+        final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        final LocalDateTime dateTime = LocalDateTime.parse(split[1], formatter);
+        final BigDecimal price = new BigDecimal(split[2]);
         return new Product(name, dateTime, price);
+    }
+
+    public static Optional<Product> findSimilar(Product product) {
+        return ProductIntegration.all().stream()
+                .filter(p -> p.getName().equals(product.getName()))
+                .filter(p -> p.getPrice().compareTo(product.getPrice())>0)
+                .findAny();
     }
 
 }

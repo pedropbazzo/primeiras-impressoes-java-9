@@ -34,19 +34,7 @@ weekDays.put( 6 , "Sexta" );
 weekDays.put( 7 , "Sábado" );
 weekDays.put( 8 , null );
 ```
-Brincando com o stream
-```java
-//Exemplo
-Map<Integer, String> weekDays = new HashMap<>(); 
-weekDays.put( 1 , "Domingo" ); 
-weekDays.put( 2 , "Segunda" ); 
-weekDays.put( 3 , "Terça" ); 
-weekDays.put( 4 , "Quarta" ); 
-weekDays.put( 5 , "Quinta" ); 
-weekDays.put( 6 , "Sexta" ); 
-weekDays.put( 7 , "Sábado" );
-weekDays.put( 8 , null );
-```
+Se não usar o stream ofNullable exibe o null
 ```java
 List<String> dayNames = weekDays .entrySet() .stream() .flatMap(e -> Stream.of(e.getValue())) .collect(Collectors.toList());
 List<String> dayNames = weekDays .entrySet() .stream() .flatMap(e -> Stream.ofNullable(e.getValue())) .collect(Collectors.toList());

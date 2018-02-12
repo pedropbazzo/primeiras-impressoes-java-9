@@ -3,6 +3,7 @@ package br.com.vtferrari;
 import br.com.vtferrari.domain.Product;
 import br.com.vtferrari.integration.ProductIntegration;
 import br.com.vtferrari.integration.TransmitInvoice;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.util.List;
@@ -14,9 +15,10 @@ public class JavanoveApplication {
 
     public static void main(String[] args) {
 
-//		SpringApplication.run(JavanoveApplication.class, args);
+        SpringApplication.run(JavanoveApplication.class, args);
+    }
 
-
+    private void main() {
         System.out.println("\nLista de livros disponíveis \n");
 
         List<Product> products = ProductIntegration.all();
@@ -56,6 +58,5 @@ public class JavanoveApplication {
             System.err.println("Ops, aconteceu um erro: " + e);
         }
     }
-
 
 }
