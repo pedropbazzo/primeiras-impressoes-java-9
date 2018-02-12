@@ -42,8 +42,8 @@ public class ProductIntegration {
 
     public static Optional<Product> findSimilar(Product product) {
         return ProductIntegration.all().stream()
-                .filter(p -> p.getName().equals(product.getName()))
-                .filter(p -> p.getPrice().compareTo(product.getPrice())>0)
+                .filter(p -> p.getName().contains(product.getName().split(" ")[0].trim()))
+                .filter(p -> p.getPrice().compareTo(product.getPrice()) != 0)
                 .findAny();
     }
 

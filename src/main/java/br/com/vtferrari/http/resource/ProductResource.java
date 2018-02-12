@@ -22,9 +22,7 @@ public class ProductResource {
     public ProductResource(List<Product> execute) {
         productName = execute.get(0).getName();
         price = execute.get(0).getPrice();
-        execute.stream().skip(1).forEach(product -> {
-                    sugestion = new ProductResource(execute.get(1));
-                });
+        execute.stream().skip(1).forEach(product -> sugestion = new ProductResource(execute.get(1)));
     }
 
     public ProductResource(Product execute) {

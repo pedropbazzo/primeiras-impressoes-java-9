@@ -5,9 +5,8 @@ import br.com.vtferrari.integration.TransmitInvoice;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
 
 @Service
 @AllArgsConstructor
@@ -19,9 +18,10 @@ public class InvoiceProductByPosition {
     public List<Product> execute(Long position, String client) {
         final Product product = obtainAllProducts.execute().get(position.intValue());
         emissor.emit(client, List.of(product));
-        List<Product> products = Arrays.asList(product);
+        List<Product> products = new ArrayList<>();
+        products.add(product);
         similarProduct.execute(product)
-                .ifPresentOrElse(products::add, ()-> System.out.println("Só pra mostrar o novo metodo do Optional"));
+                .ifPresentOrElse(products::add, () -> System.out.println("Só pra mostrar o novo metodo do Optional"));
         return products;
     }
 
